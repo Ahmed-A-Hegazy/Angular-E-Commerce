@@ -1,0 +1,60 @@
+<div class="wrapper">
+
+    <div class="title">
+        <h1>Sign Up</h1>
+        <hr>
+    </div>
+
+    <div class="contents">
+
+        <form [formGroup]="registerForm"  (ngSubmit)="handleFromSubmit(registerForm)">
+            <label>Name</label>
+
+            <input type="text" id="name" placeholder="Enter name" formControlName="name">
+            @if(submitted&&registerForm.invalid){
+                @if(registerForm.controls['name'].hasError('required')){
+                    <div style="color:red">Required Field</div>
+                }
+                @else if(registerForm.controls['name'].hasError('minlength')){
+                    <div style="color:red">at least 3 characters are required</div>
+                }
+
+            }
+ 
+            <label>Email</label>
+
+            <input type="email" id="email" placeholder="Enter Email" formControlName="email">
+            @if(submitted&&registerForm.invalid){
+                @if(registerForm.controls['email'].hasError('required')){
+                    <div style="color:red">Required Field</div>
+                }
+                @else if(registerForm.controls['email'].hasError('pattern')){
+                    <div style="color:red">Invalid email</div>
+                }
+            }
+            <label>Password</label>
+
+            <input type="password" id="password" placeholder="Enter Password" formControlName="password">
+            @if(submitted&&registerForm.invalid){
+                @if(registerForm.controls['password'].hasError('required')){
+                    <div style="color:red">Required Field</div>
+                }
+                @else if(registerForm.controls['password'].hasError('pattern')){
+                    <div style="color:red">Invalid password</div>
+                }
+            }
+            <label>Confirm Password</label>
+
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword">
+
+
+            @if(submitted&&registerForm.invalid&&!confirmPassword){
+                <div style="color:red">Password mismatch</div>
+            }
+
+            <button [disabled]="submitted && registerForm.invalid">Register</button>
+        </form>
+    </div>
+
+
+</div>

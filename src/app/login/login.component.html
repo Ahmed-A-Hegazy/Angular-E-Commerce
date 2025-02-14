@@ -1,0 +1,43 @@
+<div class="wrapper">
+
+    <div class="title">
+        <h1>Log In</h1>
+        <hr>
+    </div>
+
+    <div class="contents">
+        <form #submitForm="ngForm" (ngSubmit)="handleFromSubmit(submitForm)">
+            <label>Email</label>
+            <input name="email" type="email" ngModel required email minlength="8" #email="ngModel" placeholder="Email Address">
+            @if(submitted && email.invalid){
+                @if(email.hasError('required')){
+                    <div style="color:red">Required Field</div>
+                }
+                @else if(email.hasError('minlength')){
+                    <div style="color:red">Email must have a minimum of 8 characters</div>
+                }
+                @else {
+                    <div style="color:red">Invalid Email</div>
+                }
+            }
+
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="password" ngModel minlength="8" required #password="ngModel">
+            @if(submitted && password.invalid){
+                @if(password.hasError('required')){
+                    <div style="color:red">Required Field</div>
+                }
+                @else if(password.hasError('minlength')){
+                    <div style="color:red">Password must have a minimum of 8 characters</div>
+                }
+            }
+
+
+            <button>Log in</button>
+        </form>
+
+    </div>
+
+
+</div>

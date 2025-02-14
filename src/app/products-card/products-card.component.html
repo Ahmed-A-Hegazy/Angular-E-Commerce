@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+
+
+
+    <div class="card">
+        <div class="state" [ngStyle]="{'background-color': product.availabilityStatus=='Low Stock'?'red':product.availabilityStatus=='In Stock'?'green':'red'}">{{product.availabilityStatus}}</div>
+        <div><img [src]="product.thumbnail"></div>
+        <div class="title">{{product.title}}</div>
+        <div>{{product.tags.join(", ")}}</div>
+
+        <div class="price-tag">
+            <div class="discount">{{round(product.price | percentage:product.discountPercentage)|currency}}</div>
+            <div class="price">{{product.price | currency}}</div>
+        </div>
+
+        <div class="rating">
+            @for (item of  [].constructor(5); track $index) {
+                @if($index<round(product.rating)){<i class="fa-solid fa-star"  style="color:gold"></i>}
+                @else {<i class="fa-regular fa-star"></i>}
+            }
+        </div>
+ 
+        <div class="button-div"><button (click)="handle_item(product.id)"><i class="fa-solid fa-eye"></i></button><button (click)="add_to_cart()"><i class="fa-solid fa-cart-shopping">+</i></button></div>
+        @if(product.qnty){
+            <div class="button-div-2">
+                <button style="background-color: red;" (click)="remove_from_cart()"><i class="fa-solid fa-trash-can"></i></button>
+
+                <button style="background-color: red;" (click)="minus_from_cart()">-</button>
+                <h1>{{product.qnty}}</h1>
+                <button style="background-color: green;" (click)="add_to_cart()">+</button>
+
+            </div>
+
+
+        }
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<div class="wrapper">
+
+    <div class="title">
+        <h1>Product Details</h1>
+        <hr>
+    </div>
+
+    <div class="products-wrapper">
+            <div class="card">
+                <div class="state" [ngStyle]="{'background-color': product.availabilityStatus=='Low Stock'?'red':product.availabilityStatus=='In Stock'?'green':'red'}">{{product.availabilityStatus}}</div>
+                <div class="title product_title">{{product.title}}</div>
+
+                <div>{{product.tags.join(", ")}}</div>
+
+                <div class="price-tag">
+                    <div class="discount">{{round(product.price | percentage:product.discountPercentage)|currency}}</div>
+                    <div class="price">{{product.price | currency}}</div>
+                </div>
+        
+                <div class="rating">
+                    @for (item of  [].constructor(5); track $index) {
+                        @if($index<round(product.rating)){<i class="fa-solid fa-star"  style="color:gold"></i>}
+                        @else {<i class="fa-regular fa-star"></i>}
+                    }
+                </div>
+                
+                <div class="">{{product.description}}</div>
+
+                <div class="button-div"><button (click)="back()"><i class="fa-solid fa-house"></i></button><button (click)="add_to_cart(product)"><i class="fa-solid fa-cart-shopping">+</i></button></div>
+            </div>
+            <div class="card  image_card">
+                <div><img [src]="product.images[selected]"></div>
+                <div class="image_selector">
+                    @for(image of product.images ; track $index){
+                       <img [src]="image" (click)="selected=$index" [ngStyle]="{'background-color': selected==$index?'rgb(11,11,11)':'grey'}">
+                    }
+                </div>
+            </div>
+        
+    </div>
+
+
+</div>

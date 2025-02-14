@@ -1,0 +1,23 @@
+<div class="wrapper">
+
+    <div class="title">
+        <h1>Total : {{total | currency}}</h1>
+        <hr>
+    </div>
+
+    <div class="products">
+        @if(cart.length>0){
+            <div class="products-wrapper">
+                @for (item of cart;track item.id){
+               
+                    <app-products-card [product]="item"  (toggle_parent)="toggle($event)"></app-products-card>
+        
+                }
+            </div>
+        }
+        @else {
+            <h1 style="color:yellow">Cart is Empty !</h1>
+        }
+        
+
+</div>
